@@ -1,8 +1,8 @@
 # claudino - fight claude boredom
 
-The next time:
+Next time:
 - Claude is down...
-- You catch yourself bored, following it Prestidigitating in the terminal...
+- You catch yourself bored, watching Claude prestidigitate in the terminal...
 
 No worries, I got you. 
 Open claudino:
