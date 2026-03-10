@@ -30,7 +30,7 @@ tmux -V
 git --version
 ```
 
-## Fast start (works from any folder)
+## Fast install (from any folder)
 
 ```bash
 git clone https://github.com/mohidbt/claudino.git
