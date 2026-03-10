@@ -1,11 +1,10 @@
-# claudino -  fight claude boredom
+# claudino - fight claude boredom
 
 Next time:
-
 - Claude is down...
 - You catch yourself bored, watching Claude prestidigitate in the terminal...
 
-No worries, I got you. 
+No worries, I got you.
 Open claudino:
 A tiny terminal dino game you can toggle **while Claude is working**, without messing with Claude's TUI - using **tmux**.
 
@@ -13,109 +12,108 @@ A tiny terminal dino game you can toggle **while Claude is working**, without me
 - Jump: `Space` or `Up`
 - Quit game: `q` or `Esc`
 
-## Fast start (from GitHub)
+## Preview
 
-```bash
-git clone https://github.com/mohidbt/claudino.git
-cd claudino
-chmod +x scripts/install.sh scripts/claudino.py
-./scripts/install.sh
-```
+![claudino in tmux](assets/preview.png)
 
-Ensure `~/bin` is on PATH:
+## Requirements
 
-```bash
-grep -q 'export PATH="$HOME/bin:$PATH"' ~/.bashrc 2>/dev/null || echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-grep -q 'export PATH="$HOME/bin:$PATH"' ~/.zshrc 2>/dev/null || echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
-exec "$SHELL" -l
-```
+- `python3`
+- `tmux`
+- `git`
 
-Install tmux binding:
-
-```bash
-cat tmux/claudino-toggle.conf >> ~/.tmux.conf
-tmux source-file ~/.tmux.conf
-```
-
-## One-command launcher
-
-```bash
-install -m 755 scripts/claude-tmux.sh "$HOME/bin/claude-tmux"
-claude-tmux
-```
-
-
-## Every time after installation
-
-If you installed the one-command launcher:
-
-```bash
-claude-tmux
-```
-
-If you did not install the one-command launcher, run Claude inside tmux manually:
-
-```bash
-tmux new -A -s claude
-claude
-```
-
-Then use `Ctrl+g` any time to toggle claudino on/off.
-
-## Fast start (clone + copy/paste)
+Quick check:
 
 ```bash
 python3 --version
 tmux -V
+git --version
+```
 
-chmod +x scripts/install.sh scripts/claudino.py
+## Fast start (works from any folder)
+
+```bash
+git clone https://github.com/mohidbt/claudino.git
+cd claudino
+chmod +x scripts/install.sh scripts/claudino.py scripts/claude-tmux.sh
 ./scripts/install.sh
+exec "$SHELL" -l
 ```
 
 Add the tmux toggle binding:
 
 ```bash
 cat tmux/claudino-toggle.conf >> ~/.tmux.conf
-tmux source-file ~/.tmux.conf
 ```
 
-Run in claude in tmux:
+Start tmux, load the binding, and run Claude:
+
+```bash
+tmux new -A -s claude
+tmux source-file ~/.tmux.conf
+claude
+```
+
+Press `Ctrl+g` anytime to open/close claudino.
+
+## Launching
+
+### Creating claude-tmux command
+Install one time:
+
+```bash
+install -m 755 scripts/claude-tmux.sh "$HOME/bin/claude-tmux"
+```
+
+Use every time:
+
+```bash
+claude-tmux
+```
+
+### Alternative, if you did not install it:
 
 ```bash
 tmux new -A -s claude
 claude
 ```
 
-Press `Ctrl+g` to open/close claudino.
-
-## Files in this repo
-
-- `scripts/claudino.py`: the game
-- `scripts/install.sh`: local installer (`~/bin/claudino` + PATH helper)
-- `tmux/claudino-toggle.conf`: `Ctrl+g` toggle keybind
-- `scripts/claude-tmux.sh`: optional launcher that starts/attaches tmux and runs Claude
-
+Then use `Ctrl+g` to toggle claudino.
 
 ## Troubleshooting
 
-Grey background bands in tmux:
+`tmux: command not found`
+
+Install tmux first:
+
+- macOS (Homebrew): `brew install tmux`
+- Ubuntu/Debian: `sudo apt update && sudo apt install -y tmux`
+- Fedora: `sudo dnf install -y tmux`
+
+`cat tmux/claudino-toggle.conf: No such file or directory`
+
+- You are not inside the cloned repo directory.
+- Run `cd claudino` (or your repo path), then try again.
+
+Grey shaded background in tmux:
 
 ```tmux
 set -g window-style bg=default
 set -g window-active-style bg=default
 ```
 
-Then reload:
+Then reload inside tmux:
 
 ```bash
 tmux source-file ~/.tmux.conf
 ```
 
-Need a different toggle key?
+## Files
 
-- Edit `tmux/claudino-toggle.conf`
-- Replace `C-g` with another key, like `C-p`
-- Re-append it to `~/.tmux.conf` and reload
+- `scripts/claudino.py`: the game
+- `scripts/install.sh`: installs `claudino` to `~/bin`
+- `tmux/claudino-toggle.conf`: `Ctrl+g` toggle keybind
+- `scripts/claude-tmux.sh`: optional launcher
 
 ## License
 

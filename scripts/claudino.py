@@ -81,7 +81,7 @@ def main(stdscr):
                         break
 
         stdscr.erase()
-        stdscr.addstr(0, 2, "claudino - Space/Up jump, q quit, ESC quit")
+        stdscr.addstr(0, 2, "claudino - Space/Up jump, q/Esc: quit")
         stdscr.addstr(0, max(0, w - 20), f"Score {score:6d}")
 
         stdscr.hline(ground_y + 1, 0, ord("-"), w)
